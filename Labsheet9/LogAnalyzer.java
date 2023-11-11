@@ -23,6 +23,7 @@ public class LogAnalyzer
         myLogAnalyzer.printHourlyCounts();
         myLogAnalyzer.numberOfAccesses();
         myLogAnalyzer.busiestHour();
+        myLogAnalyzer.quietestHour();
     }
     
     /**
@@ -100,8 +101,30 @@ public class LogAnalyzer
                 indexHighest = i;
             }
         }
-        
+
         System.out.println("The busiest hour is '" + indexHighest + "' with a count of " + valHighest);
         return indexHighest;
+    }
+
+    /**
+     * Prints the quietest hour and its access count
+     * - If there are multiple hours with the same access count, the first one that appears will be selected.
+     */
+    public int quietestHour()
+    {
+        int indexLowest = 0;
+        int valLowest = 0;
+
+        for (int i = 0; i < hourCounts.length; i ++)
+        {
+            if (hourCounts[i] < valLowest)
+            {
+                valLowest = hourCounts[i];
+                indexLowest = i;
+            }
+        }
+        
+        System.out.println("The quietest hour is '" + indexLowest + "' with a count of " + valLowest);
+        return indexLowest;
     }
 }
