@@ -24,6 +24,7 @@ public class LogAnalyzer
         myLogAnalyzer.numberOfAccesses();
         myLogAnalyzer.busiestHour();
         myLogAnalyzer.quietestHour();
+        myLogAnalyzer.busiestTwoHourPeriod();
     }
     
     /**
@@ -127,4 +128,29 @@ public class LogAnalyzer
         System.out.println("The quietest hour is '" + indexLowest + "' with a count of " + valLowest);
         return indexLowest;
     }
+
+    /**
+     * Prints the busiest two hour period and its access count
+     * - If there are multiple hours with the same access count, the first one that appears will be selected.
+     */
+    public int busiestTwoHourPeriod()
+    {
+        int indexHighest = 0;
+        int valHighest = 0;
+        int currentCount = 0;
+
+        for (int i = 0; i < hourCounts.length - 1; i ++)
+        {
+            currentCount = hourCounts[i] + hourCounts[i + 1];
+            if (currentCount > valHighest)
+            {
+                valHighest = currentCount;
+                indexHighest = i;
+            }
+        }
+
+        System.out.println("The busiest two hour period starts from '" + indexHighest + "' with a count of " + valHighest);
+        return indexHighest;
+    }
+
 }
