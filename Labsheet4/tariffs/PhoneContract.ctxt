@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.target=PhoneContract
+comment0.text=\r\n\ Maintain\ details\ of\ a\ mobile\ phone\ contract\ in\ terms\ of\r\n\ the\ rate\ charged\ for\ phone\ calls.\r\n\ \r\n\ @author\ David\ J.\ Barnes\ and\ Michael\ K\u00F6lling\r\n\ @version\ 2017.10.15\r\n
+comment1.params=phoneNumber
+comment1.target=PhoneContract(java.lang.String)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ PhoneContract.\r\n\ @param\ phoneNumber\ The\ number\ of\ this\ contract.\r\n
+comment10.params=
+comment10.target=void\ printBill()
+comment2.params=duration
+comment2.target=void\ makeCall(int)
+comment2.text=\r\n\ Calculate\ the\ cost\ of\ a\ call\ of\ the\ given\ duration.\r\n\ @param\ duration\ The\ length\ of\ the\ call\ in\ seconds.\r\n
+comment3.params=
+comment3.target=int\ getBill()
+comment3.text=\r\n\ Return\ the\ current\ bill,\ in\ cents.\r\n\ @return\ The\ current\ bill.\r\n
+comment4.params=
+comment4.target=int\ getTotalDuration()
+comment5.params=
+comment5.target=java.lang.String\ getPhoneNumber()
+comment6.params=
+comment6.target=int\ getTotalNumCallsMade()
+comment7.params=
+comment7.target=int\ getAverageCallDuration()
+comment8.params=
+comment8.target=int\ getNumCheapCallsMade()
+comment9.params=
+comment9.target=int\ getNumOrigCallsMade()
+numComments=11

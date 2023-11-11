@@ -1,0 +1,32 @@
+1.
+private ArrayList<Book> library;
+
+2.
+ArrayList<Student> ppa = new ArrayList<Student>();
+
+3.
+private ArrayList<MusicTrack> tracks;
+
+4.
+this.library = new ArrayList<Book>();
+this.library = new ArrayList<>();
+
+this.ppa = new ArrayList<Student>();
+this.ppa = new ArrayList<>();
+
+this.tracks = new ArrayList<MusicTrack>();
+this.tracks = new ArrayList<>();
+
+5.
+10
+
+6.
+public Item get(int index);
+    return items.get(index);
+items.get(4);
+
+7.
+14
+
+8.
+files.add(favouriteTrack);
