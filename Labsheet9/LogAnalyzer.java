@@ -16,11 +16,12 @@ public class LogAnalyzer
         String desiredFileName = "lyle.txt";
         LogfileCreator myLogfileCreator = new LogfileCreator();
         myLogfileCreator.createFile(desiredFileName, 20);
-        
+
         LogAnalyzer myLogAnalyzer = new LogAnalyzer(desiredFileName);
         myLogAnalyzer.printData();
         myLogAnalyzer.analyzeHourlyData();
         myLogAnalyzer.printHourlyCounts();
+        myLogAnalyzer.numberOfAccesses();
     }
     
     /**
@@ -67,4 +68,15 @@ public class LogAnalyzer
     {
         reader.printData();
     }
+
+    public void numberOfAccesses()
+    {
+        int sum = 0;
+        for (int count: hourCounts)
+        {
+            sum += count;
+        }
+        System.out.println("Number of accesses: " + sum);
+    }
+    
 }
