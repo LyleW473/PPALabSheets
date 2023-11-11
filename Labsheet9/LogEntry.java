@@ -70,7 +70,15 @@ public class LogEntry implements Comparable<LogEntry>
     public int getTime(String time)
     {
         String lowerCaseTime = time.toLowerCase();
-        if (lowerCaseTime.equals("day"))
+        if (lowerCaseTime.equals("year"))
+        {
+            return dataValues[YEAR];
+        }
+        else if (lowerCaseTime.equals("month"))
+        {
+            return dataValues[MONTH];
+        }
+        else if (lowerCaseTime.equals("day"))
         {
             return dataValues[DAY];
         }

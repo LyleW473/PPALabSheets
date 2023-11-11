@@ -8,12 +8,24 @@ import java.util.HashMap;
  */
 public class LogAnalyzer
 {
+
+
+    // Where to calculate the minute access counts.
+    private int[] minuteCounts;
+
     // Where to calculate the hourly access counts.
     private int[] hourCounts;
 
     // Where to calculate the daily access counts.
     private int[] dayCounts;
-    
+
+    // Where to calculate the monthly access counts.
+    private int[] monthCounts;
+
+    // Where to calculate the yearly access counts.
+    private int[] yearCounts;
+
+
     // Use a LogfileReader to access the data.
     private LogfileReader reader;
 
@@ -25,17 +37,33 @@ public class LogAnalyzer
 
         LogAnalyzer myLogAnalyzer = new LogAnalyzer(desiredFileName);
         myLogAnalyzer.printData();
+
+        myLogAnalyzer.analyzeData("minute");
+        myLogAnalyzer.busiestX("minute");
+        myLogAnalyzer.quietestX("minute");
+        myLogAnalyzer.busiestTwoXPeriod("minute");
+
         myLogAnalyzer.analyzeData("hour");
         myLogAnalyzer.numberOfAccesses();
         myLogAnalyzer.busiestX("hour");
         myLogAnalyzer.quietestX("hour");
         myLogAnalyzer.busiestTwoXPeriod("hour");
 
-        // Challenge methods
         myLogAnalyzer.analyzeData("day");
         myLogAnalyzer.busiestX("day");
         myLogAnalyzer.quietestX("day");
         myLogAnalyzer.busiestTwoXPeriod("day");
+
+        myLogAnalyzer.analyzeData("month");
+        myLogAnalyzer.busiestX("month");
+        myLogAnalyzer.quietestX("month");
+        myLogAnalyzer.busiestTwoXPeriod("month");
+
+        myLogAnalyzer.analyzeData("year");
+        myLogAnalyzer.busiestX("year");
+        myLogAnalyzer.quietestX("year");
+        myLogAnalyzer.busiestTwoXPeriod("year");
+
     }
     
     /**
@@ -43,11 +71,20 @@ public class LogAnalyzer
      */
     public LogAnalyzer(String fileName)
     { 
+        // Create the array object to hold the minute access counts.
+        minuteCounts = new int[60];
+
         // Create the array object to hold the hourly access counts.
         hourCounts = new int[24];
 
         // Create the array object to hold the daily access counts.
         dayCounts = new int[29];
+
+        // Create the array object to hold the monthly access counts.
+        monthCounts = new int[13];
+
+        // Create the array object to hold the yearly access counts.
+        yearCounts = new int[2017];
 
         // Create the reader to obtain the data.
         reader = new LogfileReader(fileName);
@@ -112,13 +149,25 @@ public class LogAnalyzer
     {
         String lowerCaseTime = time.toLowerCase();
         
-        if (lowerCaseTime.equals("hour"))
+        if (lowerCaseTime.equals("year"))
         {
-            return hourCounts;
+           return yearCounts;
+        }
+        else if (lowerCaseTime.equals("month"))
+        {
+           return monthCounts;
         }
         else if (lowerCaseTime.equals("day"))
         {
            return dayCounts;
+        }
+        else if (lowerCaseTime.equals("hour"))
+        {
+            return hourCounts;
+        }
+        else if (lowerCaseTime.equals("minute"))
+        {
+           return minuteCounts;
         }
         else
         {
