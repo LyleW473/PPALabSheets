@@ -11,16 +11,28 @@ public class LogAnalyzer
     // Use a LogfileReader to access the data.
     private LogfileReader reader;
 
+    public static void main(String[] args)
+    {   
+        String desiredFileName = "lyle.txt";
+        LogfileCreator myLogfileCreator = new LogfileCreator();
+        myLogfileCreator.createFile(desiredFileName, 20);
+        
+        LogAnalyzer myLogAnalyzer = new LogAnalyzer(desiredFileName);
+        myLogAnalyzer.printData();
+        myLogAnalyzer.analyzeHourlyData();
+        myLogAnalyzer.printHourlyCounts();
+    }
+    
     /**
      * Create an object to analyze hourly web accesses.
      */
-    public LogAnalyzer()
+    public LogAnalyzer(String fileName)
     { 
         // Create the array object to hold the hourly
         // access counts.
         hourCounts = new int[24];
         // Create the reader to obtain the data.
-        reader = new LogfileReader();
+        reader = new LogfileReader(fileName);
     }
 
     /**
