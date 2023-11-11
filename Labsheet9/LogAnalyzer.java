@@ -22,6 +22,7 @@ public class LogAnalyzer
         myLogAnalyzer.analyzeHourlyData();
         myLogAnalyzer.printHourlyCounts();
         myLogAnalyzer.numberOfAccesses();
+        myLogAnalyzer.busiestHour();
     }
     
     /**
@@ -69,6 +70,9 @@ public class LogAnalyzer
         reader.printData();
     }
 
+    /**
+     * Prints the number of total number of accesses
+     */
     public void numberOfAccesses()
     {
         int sum = 0;
@@ -79,4 +83,25 @@ public class LogAnalyzer
         System.out.println("Number of accesses: " + sum);
     }
     
+    /**
+     * Prints the busiest hour and its access count
+     * - If there are multiple hours with the same access count, the first one that appears will be selected.
+     */
+    public int busiestHour()
+    {
+        int indexHighest = 0;
+        int valHighest = 0;
+
+        for (int i = 0; i < hourCounts.length; i ++)
+        {
+            if (hourCounts[i] > valHighest)
+            {
+                valHighest = hourCounts[i];
+                indexHighest = i;
+            }
+        }
+        
+        System.out.println("The busiest hour is '" + indexHighest + "' with a count of " + valHighest);
+        return indexHighest;
+    }
 }
