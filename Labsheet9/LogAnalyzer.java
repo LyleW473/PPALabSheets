@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * Read web server data and analyse hourly access patterns.
  * 
@@ -25,12 +27,15 @@ public class LogAnalyzer
         myLogAnalyzer.printData();
         myLogAnalyzer.analyzeHourlyData();
         myLogAnalyzer.numberOfAccesses();
-        myLogAnalyzer.busiestHour();
-        myLogAnalyzer.quietestHour();
-        myLogAnalyzer.busiestTwoHourPeriod();
+        myLogAnalyzer.busiestX("hour");
+        myLogAnalyzer.quietestX("hour");
+        myLogAnalyzer.busiestTwoXPeriod("hour");
 
         // Challenge methods
         myLogAnalyzer.analyzeDailyData();
+        myLogAnalyzer.busiestX("day");
+        myLogAnalyzer.quietestX("day");
+        myLogAnalyzer.busiestTwoXPeriod("day");
     }
     
     /**
@@ -126,64 +131,88 @@ public class LogAnalyzer
         }
         System.out.println("Number of accesses: " + sum);
     }
-    
+
+    /**
+     * Returns the dictionary for the correct time
+     */
+    public int[] selectCorrectArray(String time)
+    {
+        String lowerCaseTime = time.toLowerCase();
+        
+        if (lowerCaseTime.equals("hour"))
+        {
+            return hourCounts;
+        }
+        else if (lowerCaseTime.equals("day"))
+        {
+           return dayCounts;
+        }
+        else
+        {
+            throw new IllegalArgumentException("Invalid time");
+        }
+    }
+
     /**
      * Prints the busiest hour and its access count
      * - If there are multiple hours with the same access count, the first one that appears will be selected.
      */
-    public int busiestHour()
-    {
+    public int busiestX(String time)
+    {   
+        int[] countsArray = selectCorrectArray(time);
         int indexHighest = 0;
         int valHighest = 0;
 
-        for (int i = 0; i < hourCounts.length; i ++)
+        for (int i = 0; i < countsArray.length; i ++)
         {
-            if (hourCounts[i] > valHighest)
+            if (countsArray[i] > valHighest)
             {
-                valHighest = hourCounts[i];
+                valHighest = countsArray[i];
                 indexHighest = i;
             }
         }
 
-        System.out.println("The busiest hour is '" + indexHighest + "' with a count of " + valHighest);
+        System.out.println("The busiest " + time + " is '" + indexHighest + "' with a count of " + valHighest);
         return indexHighest;
     }
 
     /**
-     * Prints the quietest hour and its access count
-     * - If there are multiple hours with the same access count, the first one that appears will be selected.
+     * Prints the quietest X and its access count
+     * - If there are multiple Xs with the same access count, the first one that appears will be selected.
      */
-    public int quietestHour()
-    {
+    public int quietestX(String time)
+    {   
+        int[] countsArray = selectCorrectArray(time);
         int indexLowest = 0;
         int valLowest = 0;
 
-        for (int i = 0; i < hourCounts.length; i ++)
+        for (int i = 0; i < countsArray.length; i ++)
         {
-            if (hourCounts[i] < valLowest)
+            if (countsArray[i] < valLowest)
             {
-                valLowest = hourCounts[i];
+                valLowest = countsArray[i];
                 indexLowest = i;
             }
         }
         
-        System.out.println("The quietest hour is '" + indexLowest + "' with a count of " + valLowest);
+        System.out.println("The quietest " + time + " is '" + indexLowest + "' with a count of " + valLowest);
         return indexLowest;
     }
 
     /**
-     * Prints the busiest two hour period and its access count
-     * - If there are multiple hours with the same access count, the first one that appears will be selected.
+     * Prints the busiest two X period and its access count
+     * - If there are multiple Xs with the same access count, the first one that appears will be selected.
      */
-    public int busiestTwoHourPeriod()
+    public int busiestTwoXPeriod(String time)
     {
+        int[] countsArray = selectCorrectArray(time);
         int indexHighest = 0;
         int valHighest = 0;
         int currentCount = 0;
 
-        for (int i = 0; i < hourCounts.length - 1; i ++)
+        for (int i = 0; i < countsArray.length - 1; i ++)
         {
-            currentCount = hourCounts[i] + hourCounts[i + 1];
+            currentCount = countsArray[i] + countsArray[i + 1];
             if (currentCount > valHighest)
             {
                 valHighest = currentCount;
