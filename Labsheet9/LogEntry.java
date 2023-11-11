@@ -62,7 +62,16 @@ public class LogEntry implements Comparable<LogEntry>
         dataValues[MINUTE] = minute;
         setWhen();
     }
-    
+
+    /**
+     * Return the day.
+     * @return The day field from the log line.
+     */
+    public int getDay()
+    {
+        return dataValues[DAY];
+    }
+
     /**
      * Return the hour.
      * @return The hour field from the log line.

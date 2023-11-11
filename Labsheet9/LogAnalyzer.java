@@ -8,6 +8,10 @@ public class LogAnalyzer
 {
     // Where to calculate the hourly access counts.
     private int[] hourCounts;
+
+    // Where to calculate the daily access counts.
+    private int[] dayCounts;
+    
     // Use a LogfileReader to access the data.
     private LogfileReader reader;
 
@@ -20,11 +24,13 @@ public class LogAnalyzer
         LogAnalyzer myLogAnalyzer = new LogAnalyzer(desiredFileName);
         myLogAnalyzer.printData();
         myLogAnalyzer.analyzeHourlyData();
-        myLogAnalyzer.printHourlyCounts();
         myLogAnalyzer.numberOfAccesses();
         myLogAnalyzer.busiestHour();
         myLogAnalyzer.quietestHour();
         myLogAnalyzer.busiestTwoHourPeriod();
+
+        // Challenge methods
+        myLogAnalyzer.analyzeDailyData();
     }
     
     /**
@@ -32,11 +38,43 @@ public class LogAnalyzer
      */
     public LogAnalyzer(String fileName)
     { 
-        // Create the array object to hold the hourly
-        // access counts.
+        // Create the array object to hold the hourly access counts.
         hourCounts = new int[24];
+
+        // Create the array object to hold the daily access counts.
+        dayCounts = new int[29];
+
         // Create the reader to obtain the data.
         reader = new LogfileReader(fileName);
+    }
+
+    /**
+     * Analyze the daily access data from the log file.
+     */
+    public void analyzeDailyData()
+    {   
+        while(reader.hasNext()) 
+        {   
+            LogEntry entry = reader.next();
+            int day = entry.getDay();
+            dayCounts[day]++;
+        }
+
+        reader.reset(); // Reset reader for entries
+        printDailyCounts();
+    }
+
+    /**
+     * Print the daily counts.
+     * These should have been set with a prior
+     * call to analyzeDailyData.
+     */
+    public void printDailyCounts()
+    {
+        System.out.println("Day: Count");
+        for(int day = 0; day < dayCounts.length; day++) {
+            System.out.println(day + ": " + dayCounts[day]);
+        }
     }
 
     /**
@@ -44,11 +82,15 @@ public class LogAnalyzer
      */
     public void analyzeHourlyData()
     {
-        while(reader.hasNext()) {
+        while(reader.hasNext()) 
+        {
             LogEntry entry = reader.next();
             int hour = entry.getHour();
             hourCounts[hour]++;
         }
+
+        reader.reset(); // Reset reader for entries
+        printHourlyCounts();
     }
 
     /**
