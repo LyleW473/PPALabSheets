@@ -25,14 +25,14 @@ public class LogAnalyzer
 
         LogAnalyzer myLogAnalyzer = new LogAnalyzer(desiredFileName);
         myLogAnalyzer.printData();
-        myLogAnalyzer.analyzeHourlyData();
+        myLogAnalyzer.analyzeData("hour");
         myLogAnalyzer.numberOfAccesses();
         myLogAnalyzer.busiestX("hour");
         myLogAnalyzer.quietestX("hour");
         myLogAnalyzer.busiestTwoXPeriod("hour");
 
         // Challenge methods
-        myLogAnalyzer.analyzeDailyData();
+        myLogAnalyzer.analyzeData("day");
         myLogAnalyzer.busiestX("day");
         myLogAnalyzer.quietestX("day");
         myLogAnalyzer.busiestTwoXPeriod("day");
@@ -52,50 +52,22 @@ public class LogAnalyzer
         // Create the reader to obtain the data.
         reader = new LogfileReader(fileName);
     }
-
+ 
     /**
      * Analyze the daily access data from the log file.
      */
-    public void analyzeDailyData()
+    public void analyzeData(String time)
     {   
+        int[] countsArray = selectCorrectArray(time);
         while(reader.hasNext()) 
         {   
             LogEntry entry = reader.next();
-            int day = entry.getDay();
-            dayCounts[day]++;
+            int i = entry.getTime(time);
+            countsArray[i]++;
         }
 
         reader.reset(); // Reset reader for entries
-        printDailyCounts();
-    }
-
-    /**
-     * Print the daily counts.
-     * These should have been set with a prior
-     * call to analyzeDailyData.
-     */
-    public void printDailyCounts()
-    {
-        System.out.println("Day: Count");
-        for(int day = 0; day < dayCounts.length; day++) {
-            System.out.println(day + ": " + dayCounts[day]);
-        }
-    }
-
-    /**
-     * Analyze the hourly access data from the log file.
-     */
-    public void analyzeHourlyData()
-    {
-        while(reader.hasNext()) 
-        {
-            LogEntry entry = reader.next();
-            int hour = entry.getHour();
-            hourCounts[hour]++;
-        }
-
-        reader.reset(); // Reset reader for entries
-        printHourlyCounts();
+        printCounts(time);
     }
 
     /**
@@ -103,11 +75,12 @@ public class LogAnalyzer
      * These should have been set with a prior
      * call to analyzeHourlyData.
      */
-    public void printHourlyCounts()
-    {
-        System.out.println("Hr: Count");
-        for(int hour = 0; hour < hourCounts.length; hour++) {
-            System.out.println(hour + ": " + hourCounts[hour]);
+    public void printCounts(String time)
+    {  
+        int[] countsArray = selectCorrectArray(time);
+        System.out.println(time + ": Count");
+        for(int i = 0; i < countsArray.length; i++) {
+            System.out.println(i + ": " + countsArray[i]);
         }
     }
     

@@ -64,32 +64,32 @@ public class LogEntry implements Comparable<LogEntry>
     }
 
     /**
-     * Return the day.
-     * @return The day field from the log line.
+     * Return the day/hour/minute
+     * @return The day/hour/minute field from the log line.
      */
-    public int getDay()
+    public int getTime(String time)
     {
-        return dataValues[DAY];
+        String lowerCaseTime = time.toLowerCase();
+        if (lowerCaseTime.equals("day"))
+        {
+            return dataValues[DAY];
+        }
+
+        else if (lowerCaseTime.equals("hour"))
+        {
+            return dataValues[HOUR];
+        }
+
+        else if (lowerCaseTime.equals("minute"))
+        {
+            return dataValues[MINUTE];
+        }
+        else
+        {
+            throw new IllegalArgumentException("Invalid time");
+        }
     }
 
-    /**
-     * Return the hour.
-     * @return The hour field from the log line.
-     */
-    public int getHour()
-    {
-        return dataValues[HOUR];
-    }
-
-    /**
-     * Return the minute.
-     * @return The minute field from the log line.
-     */
-    public int getMinute()
-    {
-        return dataValues[MINUTE];
-    }
-    
     /**
      * Create a string representation of the data.
      * This is not necessarily identical with the
