@@ -11,7 +11,7 @@ public interface Automobile {
     public void changeGear(int gear);
 
     // Additional car-related functionality
-    // Car settings manager here
+    // Note: Car settings manager here
 
     // Maintenance-related
     // Note: Maintenance manager here
