@@ -12,7 +12,7 @@ public class Car
     private String name;
     //the amount of fuel currently in the car.
     //This is expressed as a whole number percentage, from 0% to 100%
-    public int currentFuelLevel;
+    private int currentFuelLevel;
     //The number of seconds a car is slower per lap when it is raining
     private int rainSlowDown;
     //The total time take in a single race
@@ -30,7 +30,7 @@ public class Car
        this.currentFuelLevel = currentFuelLevel;
        totalTime = 0;
     }
-    
+
     /**
      * Make the car race a single lap. The time taken
      * to complete the lap is calculated by retrieving
@@ -74,6 +74,10 @@ public class Car
     
     public String getName(){
         return name;
+    }
+
+    public int getTotalTime(){
+        return totalTime;
     }
     
     public void addToTotalTime(int lapTime){

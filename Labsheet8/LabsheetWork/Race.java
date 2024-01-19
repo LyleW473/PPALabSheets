@@ -35,12 +35,12 @@ public class Race
         Car car2 = new Car("B", 0, 30);
         Car car3 = new Car("C", 50, 68);
 
-        Race race1 = new Race(car1, car2, car3, 2, 5, true);
+        Race race1 = new Race(car1, car2, car3, 100, 5, true);
         car1.setCurrentRace(race1);
         car2.setCurrentRace(race1);
         car3.setCurrentRace(race1);
 
-        System.out.println(race1.getRaceLeader().getName());
+        race1.simulateRace();
     }
 
     /**
@@ -104,15 +104,27 @@ public class Race
         //Now remove it, as it is not needed in this method
         //anyway, and make changes in the other classes 
         //to prevent the program from compiling if it was left in.
-        car1.currentFuelLevel = 987654321;
+
+        // Answer: The problem is that the attribute "currentCarLevel" is being altered erroneously as it is declared as a public
+        // attribute. This is solved by adhering to data encapsulation and declaring it instead as a private attribute and declaring
+        // a setter method to alter it, adding in validation to ensure that extreme values cannot be set.
         
         //TASK: make the cars race numberOfLaps amount of times
-        //After each lap, print:
-        //-the single lap time of each car
-        //-the total time of each car
-        //-name of the car that is leading the race
-        
-        
+        for (int i = 0; i < numberOfLaps; i ++)
+        {
+            int lapTime1 = car1.completeLap();
+            int lapTime2 = car2.completeLap();
+            int lapTime3 = car3.completeLap();
+            
+            //After each lap, print:
+            //-the single lap time of each car
+            //-the total time of each car
+            //-name of the car that is leading the race
+            System.out.println(car1.getName() + ": " + "Lap time: " + lapTime1 + " | Total time: " + car1.getTotalTime());
+            System.out.println(car2.getName() + ": " + "Lap time: " + lapTime2 + " | Total time: " + car2.getTotalTime());
+            System.out.println(car3.getName() + ": " + "Lap time: " + lapTime3 + " | Total time: " + car3.getTotalTime());
+            System.out.println("Lap number: " + i + " | Leading car: " + getRaceLeader().getName() + "\n");
+        }
     }
     
     public int getAverageLapTime()
