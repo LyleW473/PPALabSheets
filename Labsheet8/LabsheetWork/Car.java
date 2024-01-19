@@ -48,11 +48,23 @@ public class Car
         
         //TASK: if the fuel level is more than 70%, the
         //lap time is increased by 5 seconds
+        if (currentFuelLevel > 70) 
+        {
+            singleLapTime += 5;
+        }
         //Otherwise, if the fuel level is less than 30%, the
         //lap time is decreased by 5 seconds
+        else if (currentFuelLevel < 30)
+        {
+            singleLapTime -= 5;
+        }
         
         //TASK: the lap time is increased by the rainSlowDown
         //when it is raining
+        if (currentRace.getIsRaining())
+        {
+            singleLapTime += rainSlowDown;
+        }
         
         //now update the total time taken
         addToTotalTime(singleLapTime);
