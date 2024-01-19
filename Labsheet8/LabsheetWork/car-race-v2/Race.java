@@ -36,10 +36,6 @@ public class Race
         Car car3 = new Car("C", 50, 68);
 
         Race race1 = new Race(car1, car2, car3, 100, 5, true);
-        car1.setCurrentRace(race1);
-        car2.setCurrentRace(race1);
-        car3.setCurrentRace(race1);
-
         race1.simulateRace();
     }
 
@@ -69,9 +65,9 @@ public class Race
         //TASK: determine which car, out of the three
         //in the race, is the leader
 
-        int lapTime1 = car1.completeLap();
-        int lapTime2 = car2.completeLap();
-        int lapTime3 = car3.completeLap();
+        int lapTime1 = car1.completeLap(this);
+        int lapTime2 = car2.completeLap(this);
+        int lapTime3 = car3.completeLap(this);
         Car[] cars = new Car[] {car1, car2, car3};
         Integer[] times = new Integer[] {lapTime1, lapTime2, lapTime3};
 
@@ -112,9 +108,9 @@ public class Race
         //TASK: make the cars race numberOfLaps amount of times
         for (int i = 0; i < numberOfLaps; i ++)
         {
-            int lapTime1 = car1.completeLap();
-            int lapTime2 = car2.completeLap();
-            int lapTime3 = car3.completeLap();
+            int lapTime1 = car1.completeLap(this);
+            int lapTime2 = car2.completeLap(this);
+            int lapTime3 = car3.completeLap(this);
             
             //After each lap, print:
             //-the single lap time of each car

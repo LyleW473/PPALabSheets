@@ -17,8 +17,6 @@ public class Car
     private int rainSlowDown;
     //The total time take in a single race
     private int totalTime;
-    //The race that the car is currently participating in
-    private Race currentRace;
        
     /**
      * Constructor for objects of class Car
@@ -39,7 +37,7 @@ public class Car
      * 
      * @return the time taken to complete this lap
      */
-    public int completeLap(){
+    public int completeLap(Race currentRace){
         //retrieve averageLapTime from the currentRace
         int singleLapTime = currentRace.getAverageLapTime();
         
@@ -86,10 +84,5 @@ public class Car
     
     public void refuel(){
         currentFuelLevel = 100;
-    }
-    
-    public void setCurrentRace(Race currentRace)
-    {
-        this.currentRace = currentRace;
-    }
+    }   
 }
