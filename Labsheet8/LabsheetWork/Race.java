@@ -29,6 +29,20 @@ public class Race
     //a single lap
     private boolean isRaining;
 
+    public static void main(String[] args)
+    {
+        Car car1 = new Car("A", 10, 100);
+        Car car2 = new Car("B", 0, 30);
+        Car car3 = new Car("C", 50, 68);
+
+        Race race1 = new Race(car1, car2, car3, 2, 5, true);
+        car1.setCurrentRace(race1);
+        car2.setCurrentRace(race1);
+        car3.setCurrentRace(race1);
+
+        System.out.println(race1.getRaceLeader().getName());
+    }
+
     /**
      * Constructor for objects of class Race
      */
@@ -54,7 +68,27 @@ public class Race
     {
         //TASK: determine which car, out of the three
         //in the race, is the leader
-        return null;
+
+        int lapTime1 = car1.completeLap();
+        int lapTime2 = car2.completeLap();
+        int lapTime3 = car3.completeLap();
+        Car[] cars = new Car[] {car1, car2, car3};
+        Integer[] times = new Integer[] {lapTime1, lapTime2, lapTime3};
+
+        int minimumLapTime = lapTime1;
+        Car minimumCar = null;
+
+        for (int i = 0; i < times.length; i ++)
+        {   
+            // Car with the lowest lap time
+            if (times[i] < minimumLapTime)
+            {
+                minimumLapTime = times[i];
+                minimumCar = cars[i];
+            }
+        }
+
+        return minimumCar;
     }
     
     /**

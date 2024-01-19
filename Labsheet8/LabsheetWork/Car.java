@@ -72,6 +72,9 @@ public class Car
         return singleLapTime;
     }
     
+    public String getName(){
+        return name;
+    }
     
     public void addToTotalTime(int lapTime){
         totalTime += lapTime;
