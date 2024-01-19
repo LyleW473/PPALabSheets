@@ -23,9 +23,24 @@ public class RaceTrack {
         Car car1 = new Car("A", 10, 100, 59);
         Car car2 = new Car("B", 0, 30, 0);
         Car car3 = new Car("C", 50, 68, 30);
+        Car car4 = new Car("D", 30, 55, 40);
+        Car car5 = new Car("E", 25, 40, 50);
+        Car car6 = new Car("F", 5, 40, 50);
+        Car car7 = new Car("G", 7, 30, 44);
+        Car car8 = new Car("H", 99, 9, 100);
+        
+        ArrayList<Car> raceCars1 = new ArrayList<Car>(){{
+                                                        add(car1);
+                                                        add(car2);
+                                                        add(car3);
+                                                        add(car4);
+                                                        add(car5);
+                                                        add(car6);
+                                                        add(car7);
+                                                        add(car8);
+                                                        }};
 
-        Race race1 = new Race(car1, car2, car3, 3, 5);
-
+        Race race1 = new Race(raceCars1, 3, 5);
         RaceTrack raceTrack = new RaceTrack(true);
 
         race1.simulateRace(raceTrack.getIsRaining());

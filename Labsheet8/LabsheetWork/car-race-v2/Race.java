@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * This class provides the ability to simulate a number of
@@ -11,9 +12,7 @@
 public class Race
 {
     //the cars participating in the race
-    private Car car1;
-    private Car car2;
-    private Car car3;
+    private ArrayList<Car> cars;
     
     //the total amount of laps the race will last for
     private int numberOfLaps;
@@ -28,12 +27,10 @@ public class Race
     /**
      * Constructor for objects of class Race
      */
-    public Race(Car car1, Car car2, Car car3, int numberOfLaps,
+    public Race(ArrayList<Car> cars, int numberOfLaps,
     int averageLapTime)
     {
-        this.car1 = car1;
-        this.car2 = car2;
-        this.car3 = car3;
+        this.cars = cars;
         this.numberOfLaps = numberOfLaps;
         this.averageLapTime = averageLapTime;
     }
@@ -45,24 +42,26 @@ public class Race
      * 
      * @return the car that is leading the race
      */
-    public Car getRaceLeader(int lapTime1, int lapTime2, int lapTime3)
+    public Car getRaceLeader(ArrayList<Integer> lapTimes)
     {
+        // No cars in the race
+        if (lapTimes.size() == 0)
+        {
+            return null;
+        }
+
         //TASK: determine which car, out of the three
         //in the race, is the leader
-
-        Car[] cars = new Car[] {car1, car2, car3};
-        Integer[] times = new Integer[] {lapTime1, lapTime2, lapTime3};
-
-        int minimumLapTime = lapTime1;
+        int minimumLapTime = lapTimes.get(0);
         Car minimumCar = null;
 
-        for (int i = 0; i < times.length; i ++)
+        for (int i = 0; i < lapTimes.size(); i ++)
         {   
             // Car with the lowest lap time
-            if (times[i] < minimumLapTime)
+            if (lapTimes.get(i) < minimumLapTime)
             {
-                minimumLapTime = times[i];
-                minimumCar = cars[i];
+                minimumLapTime = lapTimes.get(i);
+                minimumCar = cars.get(i);
             }
         }
 
@@ -89,19 +88,24 @@ public class Race
         
         //TASK: make the cars race numberOfLaps amount of times
         for (int i = 0; i < numberOfLaps; i ++)
-        {
-            int lapTime1 = car1.completeLap(this, isRaining);
-            int lapTime2 = car2.completeLap(this, isRaining);
-            int lapTime3 = car3.completeLap(this, isRaining);
-            
-            //After each lap, print:
-            //-the single lap time of each car
-            //-the total time of each car
-            //-name of the car that is leading the race
-            System.out.println(car1.getName() + ": " + "Lap time: " + lapTime1 + " | Total time: " + car1.getTotalTime());
-            System.out.println(car2.getName() + ": " + "Lap time: " + lapTime2 + " | Total time: " + car2.getTotalTime());
-            System.out.println(car3.getName() + ": " + "Lap time: " + lapTime3 + " | Total time: " + car3.getTotalTime());
-            System.out.println("Lap number: " + i + " | Leading car: " + getRaceLeader(lapTime1, lapTime2, lapTime3).getName() + "\n");
+        {   
+            System.out.println("Lap number: " + (i + 1));
+
+            // Get all laptimes
+            ArrayList<Integer> lapTimes = new ArrayList<Integer>();
+            for (Car racecar: cars)
+            {   
+
+                int lapTime = racecar.completeLap(this, isRaining);
+                lapTimes.add(lapTime);
+                //After each lap, print:
+                //-the single lap time of each car
+                //-the total time of each car
+                //-name of the car that is leading the race
+                System.out.println(racecar.getName() + ": " + "Lap time: " + lapTime + " | Total time: " + racecar.getTotalTime());
+            }
+
+            System.out.println();
         }
     }
     
