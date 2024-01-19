@@ -20,11 +20,11 @@ public class RaceTrack {
 
     public static void main(String[] args)
     {
-        Car car1 = new Car("A", 10, 100);
-        Car car2 = new Car("B", 0, 30);
-        Car car3 = new Car("C", 50, 68);
+        Car car1 = new Car("A", 10, 100, 59);
+        Car car2 = new Car("B", 0, 30, 0);
+        Car car3 = new Car("C", 50, 68, 30);
 
-        Race race1 = new Race(car1, car2, car3, 100, 5);
+        Race race1 = new Race(car1, car2, car3, 3, 5);
 
         RaceTrack raceTrack = new RaceTrack(true);
 

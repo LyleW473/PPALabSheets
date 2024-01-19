@@ -17,16 +17,19 @@ public class Car
     private int rainSlowDown;
     //The total time take in a single race
     private int totalTime;
-       
+    // The damage level of the car (also expressed as a whole number percentage, from 0% to 100%)
+    private int damageLevel;
+    
     /**
      * Constructor for objects of class Car
      */
-    public Car(String name, int rainSlowDown, int currentFuelLevel)
+    public Car(String name, int rainSlowDown, int currentFuelLevel, int damageLevel)
     {
        this.name = name;
        this.rainSlowDown = rainSlowDown;
        this.currentFuelLevel = currentFuelLevel;
-       totalTime = 0;
+       this.totalTime = 0;
+       this.damageLevel = damageLevel;
     }
 
     /**
@@ -62,6 +65,12 @@ public class Car
         if (isRaining)
         {
             singleLapTime += rainSlowDown;
+        }
+
+        // Lap time is doubled if the damage level of this car is greater than 50%
+        if (damageLevel > 50)
+        {
+            singleLapTime *= 2;
         }
         
         //now update the total time taken
