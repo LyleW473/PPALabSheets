@@ -6,34 +6,32 @@ public class HealthPack {
         float y = 1;
         float z = 1;
         Location location = new Location(x, y, z);
-        HealthPack myHP = new HealthPack(location, 100, 1);
-        System.out.println(myHP.getPackType());
+        HealthPack healthPack1 = new HealthPack(location, 100, HealthPack.PackType.MEDIC_PACK);
+		HealthPack healthPack2 = new HealthPack(location, 100, HealthPack.PackType.TRAUMA_PACK);
+		HealthPack healthPack3 = new HealthPack(location, 100, HealthPack.PackType.EMERGENCY_PACK);
+        System.out.println(healthPack1.getPackType());
+		System.out.println(healthPack2.getPackType());
+		System.out.println(healthPack3.getPackType());
     }
 
-	public static final int MEDIC_PACK = 0;
-	public static final int TRAUMA_PACK = 1;
-	public static final int EMERGENCY_PACK = 2;
+	public enum PackType {MEDIC_PACK, TRAUMA_PACK, EMERGENCY_PACK};
 
 	// Set to one of the three constants above.
-	public int packType;
+	public PackType packType;
 
 	// Ranges from 0 to 100.
 	public int healthLevel;
 	
 	public Location location;
 	
-	public HealthPack(Location loc, int level, int type) {
+	public HealthPack(Location loc, int level, PackType pt) {
 		this.location = loc;
 		healthLevel = level;
-		packType = type;
+		packType = pt;
 	}
 	
 	Location getLocation() {
 		return location;
-	}
-	
-	int getType() {
-		return packType;
 	}
 	
 	int getHealthLevel() {
@@ -44,11 +42,11 @@ public class HealthPack {
 		return location.toString();
 	}
 
-	public int getPackType() {
+	public PackType getPackType() {
 		return packType;
 	}
 
-	public void setPackType(int packType) {
+	public void setPackType(PackType packType) {
 		this.packType = packType;
 	}
 
