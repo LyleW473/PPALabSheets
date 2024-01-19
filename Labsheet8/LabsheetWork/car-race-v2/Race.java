@@ -25,32 +25,17 @@ public class Race
      */
     private int averageLapTime;
 
-    //this tracks information that can affect the time taken to complete
-    //a single lap
-    private boolean isRaining;
-
-    public static void main(String[] args)
-    {
-        Car car1 = new Car("A", 10, 100);
-        Car car2 = new Car("B", 0, 30);
-        Car car3 = new Car("C", 50, 68);
-
-        Race race1 = new Race(car1, car2, car3, 100, 5, true);
-        race1.simulateRace();
-    }
-
     /**
      * Constructor for objects of class Race
      */
     public Race(Car car1, Car car2, Car car3, int numberOfLaps,
-    int averageLapTime, boolean isRaining)
+    int averageLapTime)
     {
         this.car1 = car1;
         this.car2 = car2;
         this.car3 = car3;
         this.numberOfLaps = numberOfLaps;
         this.averageLapTime = averageLapTime;
-        this.isRaining = isRaining;
     }
     
     /**
@@ -60,14 +45,11 @@ public class Race
      * 
      * @return the car that is leading the race
      */
-    public Car getRaceLeader()
+    public Car getRaceLeader(int lapTime1, int lapTime2, int lapTime3)
     {
         //TASK: determine which car, out of the three
         //in the race, is the leader
 
-        int lapTime1 = car1.completeLap(this);
-        int lapTime2 = car2.completeLap(this);
-        int lapTime3 = car3.completeLap(this);
         Car[] cars = new Car[] {car1, car2, car3};
         Integer[] times = new Integer[] {lapTime1, lapTime2, lapTime3};
 
@@ -92,7 +74,7 @@ public class Race
      * laps around the track for the amount of laps
      * specified in numberOfLaps.
      */
-    public void simulateRace()
+    public void simulateRace(boolean isRaining)
     {
         //TASK: look at the following line of code. Explain
         //what is wrong with it, but why the program compiles
@@ -108,9 +90,9 @@ public class Race
         //TASK: make the cars race numberOfLaps amount of times
         for (int i = 0; i < numberOfLaps; i ++)
         {
-            int lapTime1 = car1.completeLap(this);
-            int lapTime2 = car2.completeLap(this);
-            int lapTime3 = car3.completeLap(this);
+            int lapTime1 = car1.completeLap(this, isRaining);
+            int lapTime2 = car2.completeLap(this, isRaining);
+            int lapTime3 = car3.completeLap(this, isRaining);
             
             //After each lap, print:
             //-the single lap time of each car
@@ -119,17 +101,12 @@ public class Race
             System.out.println(car1.getName() + ": " + "Lap time: " + lapTime1 + " | Total time: " + car1.getTotalTime());
             System.out.println(car2.getName() + ": " + "Lap time: " + lapTime2 + " | Total time: " + car2.getTotalTime());
             System.out.println(car3.getName() + ": " + "Lap time: " + lapTime3 + " | Total time: " + car3.getTotalTime());
-            System.out.println("Lap number: " + i + " | Leading car: " + getRaceLeader().getName() + "\n");
+            System.out.println("Lap number: " + i + " | Leading car: " + getRaceLeader(lapTime1, lapTime2, lapTime3).getName() + "\n");
         }
     }
     
     public int getAverageLapTime()
     {
         return averageLapTime;
-    }
-    
-    public boolean getIsRaining()
-    {
-        return isRaining;
     }
 }

@@ -37,7 +37,7 @@ public class Car
      * 
      * @return the time taken to complete this lap
      */
-    public int completeLap(Race currentRace){
+    public int completeLap(Race currentRace, boolean isRaining){
         //retrieve averageLapTime from the currentRace
         int singleLapTime = currentRace.getAverageLapTime();
         
@@ -59,7 +59,7 @@ public class Car
         
         //TASK: the lap time is increased by the rainSlowDown
         //when it is raining
-        if (currentRace.getIsRaining())
+        if (isRaining)
         {
             singleLapTime += rainSlowDown;
         }
