@@ -28,7 +28,7 @@ public class Car
        this.name = name;
        this.rainSlowDown = rainSlowDown;
        this.currentFuelLevel = currentFuelLevel;
-       totalTime = 0;
+       this.totalTime = 0;
     }
 
     /**
