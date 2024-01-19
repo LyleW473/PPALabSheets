@@ -64,14 +64,11 @@ public class Race
      * 
      * @return the car that is leading the race
      */
-    public Car getRaceLeader()
+    public Car getRaceLeader(int lapTime1, int lapTime2, int lapTime3)
     {
         //TASK: determine which car, out of the three
         //in the race, is the leader
 
-        int lapTime1 = car1.completeLap();
-        int lapTime2 = car2.completeLap();
-        int lapTime3 = car3.completeLap();
         Car[] cars = new Car[] {car1, car2, car3};
         Integer[] times = new Integer[] {lapTime1, lapTime2, lapTime3};
 
@@ -123,7 +120,7 @@ public class Race
             System.out.println(car1.getName() + ": " + "Lap time: " + lapTime1 + " | Total time: " + car1.getTotalTime());
             System.out.println(car2.getName() + ": " + "Lap time: " + lapTime2 + " | Total time: " + car2.getTotalTime());
             System.out.println(car3.getName() + ": " + "Lap time: " + lapTime3 + " | Total time: " + car3.getTotalTime());
-            System.out.println("Lap number: " + i + " | Leading car: " + getRaceLeader().getName() + "\n");
+            System.out.println("Lap number: " + i + " | Leading car: " + getRaceLeader(lapTime1, lapTime2, lapTime3).getName() + "\n");
         }
     }
     
