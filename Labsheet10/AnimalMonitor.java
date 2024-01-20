@@ -27,6 +27,7 @@ public class AnimalMonitor
         animalMonitor1.addSightings("sightings.csv");
         animalMonitor1.printList();
         animalMonitor1.printSightingsOf("Buffalo");
+        animalMonitor1.printSightingsInPeriod(2);
     }
     /**
      * Add the sightings recorded in the given filename to the current list.
@@ -53,6 +54,15 @@ public class AnimalMonitor
     public void printSightingsOf(String animal)
     { 
         sightings.stream().filter(s -> animal.equals(s.getAnimal())).forEach((Sighting record) -> System.out.println(record.getDetails()));
+    }
+
+    /**
+     * Print the details of all the sightings recorded during a particular period
+     * @param period The period of the sightings
+     */
+    public void printSightingsInPeriod(int period)
+    {
+        sightings.stream().filter(s -> period == s.getPeriod()).forEach((Sighting record) -> System.out.println(record.getDetails()));
     }
     
     /**
@@ -150,5 +160,5 @@ public class AnimalMonitor
         }
         return filtered;
     }
-    
+
 }
