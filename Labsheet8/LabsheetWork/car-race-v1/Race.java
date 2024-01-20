@@ -70,17 +70,17 @@ public class Race
         //in the race, is the leader
 
         Car[] cars = new Car[] {car1, car2, car3};
-        Integer[] times = new Integer[] {lapTime1, lapTime2, lapTime3};
 
-        int minimumLapTime = lapTime1;
+        int minimumTotalTime = car1.getTotalTime();
         Car minimumCar = null;
 
-        for (int i = 0; i < times.length; i ++)
+        for (int i = 0; i < cars.length; i ++)
         {   
-            // Car with the lowest lap time
-            if (times[i] < minimumLapTime)
+            // Car with the lowest total time
+            int carTotalTime =  cars[i].getTotalTime();
+            if (carTotalTime < minimumTotalTime)
             {
-                minimumLapTime = times[i];
+                minimumTotalTime = carTotalTime;
                 minimumCar = cars[i];
             }
         }
@@ -120,7 +120,7 @@ public class Race
             System.out.println(car1.getName() + ": " + "Lap time: " + lapTime1 + " | Total time: " + car1.getTotalTime());
             System.out.println(car2.getName() + ": " + "Lap time: " + lapTime2 + " | Total time: " + car2.getTotalTime());
             System.out.println(car3.getName() + ": " + "Lap time: " + lapTime3 + " | Total time: " + car3.getTotalTime());
-            System.out.println("Lap number: " + i + " | Leading car: " + getRaceLeader(lapTime1, lapTime2, lapTime3).getName() + "\n");
+            System.out.println("Lap number: " + (i + 1) + " | Leading car: " + getRaceLeader(lapTime1, lapTime2, lapTime3).getName() + "\n");
         }
     }
     
