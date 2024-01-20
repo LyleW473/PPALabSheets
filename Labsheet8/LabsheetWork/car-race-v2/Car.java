@@ -15,8 +15,6 @@ public class Car
     private int currentFuelLevel;
     //The number of seconds a car is slower per lap when it is raining
     private int rainSlowDown;
-    //The total time take in a single race
-    private int totalTime;
     // The damage level of the car (also expressed as a whole number percentage, from 0% to 100%)
     private int damageLevel;
     
@@ -28,7 +26,6 @@ public class Car
        this.name = name;
        this.rainSlowDown = rainSlowDown;
        this.currentFuelLevel = currentFuelLevel;
-       this.totalTime = 0;
        this.damageLevel = damageLevel;
     }
 
@@ -72,23 +69,11 @@ public class Car
         {
             singleLapTime *= 2;
         }
-        
-        //now update the total time taken
-        addToTotalTime(singleLapTime);
-        
         return singleLapTime;
     }
     
     public String getName(){
         return name;
-    }
-
-    public int getTotalTime(){
-        return totalTime;
-    }
-    
-    public void addToTotalTime(int lapTime){
-        totalTime += lapTime;
     }
     
     public void refuel(){
