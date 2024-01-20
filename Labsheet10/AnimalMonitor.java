@@ -28,6 +28,7 @@ public class AnimalMonitor
         animalMonitor1.printList();
         animalMonitor1.printSightingsOf("Buffalo");
         animalMonitor1.printSightingsInPeriod(2);
+        animalMonitor1.printSightingsOfAnimalInPeriod("Mountain Gorilla", 2);
     }
     /**
      * Add the sightings recorded in the given filename to the current list.
@@ -57,13 +58,23 @@ public class AnimalMonitor
     }
 
     /**
-     * Print the details of all the sightings recorded during a particular period
-     * @param period The period of the sightings
+     * Print the details of all the sightings recorded during a particular period.
+     * @param period The period of the sightings.
      */
     public void printSightingsInPeriod(int period)
     {
         sightings.stream().filter(s -> period == s.getPeriod()).forEach((Sighting record) -> System.out.println(record.getDetails()));
     }
+
+    /**
+     * Print the details of all the sightings recorded of a particular animal during a particular period.
+     * @param animal The type of animal.
+     * @param period The period of the sightings.
+     */
+    public void printSightingsOfAnimalInPeriod(String animal, int period)
+    {
+        sightings.stream().filter(s -> animal.equals(s.getAnimal())).filter(s -> period == s.getPeriod()).forEach((Sighting record) -> System.out.println(record.getDetails()));
+    } 
     
     /**
      * Print all the sightings by the given spotter.
