@@ -1,7 +1,7 @@
 public class Screen 
 {
     private int id;
-    private int[][] seats; // 0 = Empty, 1 = Occupied, -2 = 
+    private int[][] seats; // 0 = Empty, 1 = Occupied, -2 = Excess
     private String movieTitle;
     private double movieCost;
     private int numAvailableSeats;
@@ -10,6 +10,9 @@ public class Screen
 
     public static void main(String[] args) {
         Screen screen1 = new Screen(0, "Lyle, Lyle, Crocodile", 3.25, 4, 16);
+        System.out.println(screen1.book(0, 1));
+        System.out.println(screen1.book(1, 3));
+        System.out.println(screen1.book(1, 3));
     }
 
     public Screen(int id, String movieTitle, double movieCost, int numRows, int numAvailableSeats)
@@ -55,5 +58,26 @@ public class Screen
                 System.out.println(i + " " + j + " " + seats[i][j]);
             }
         }
+    }
+
+    /**
+     * Resets the seats of the screen to its initial starting state
+     * @param rowNumber The row number on the Ticket
+     * @param seatNumber The seat number on the Ticket
+     * @return Boolean indicating whether the booking was successful or not
+     */
+    public boolean book(int rowNumber, int seatNumber)
+    {
+        // Row and seat number starts from 0, not 1
+        int rowIndex = rowNumber - 1;
+        int seatIndex = seatNumber - 1;
+
+        // Check if row and seat indexes are valid and that the seat hasn't already been booked
+        if ((0 <= rowIndex && rowIndex < numRows) && (0 <= seatIndex && seatIndex < numCols) && (seats[rowIndex][seatIndex] != 1))
+        {
+            seats[rowIndex][seatIndex] = 1; // Set as booked
+            return true;
+        }
+        return false;
     }
 }
