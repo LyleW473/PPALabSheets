@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.stream.Stream;
 
 /**
  * Monitor counts of different types of animal.
@@ -25,6 +26,7 @@ public class AnimalMonitor
         AnimalMonitor animalMonitor1 = new AnimalMonitor();
         animalMonitor1.addSightings("sightings.csv");
         animalMonitor1.printList();
+        animalMonitor1.printSightingsOf("Buffalo");
     }
     /**
      * Add the sightings recorded in the given filename to the current list.
@@ -49,12 +51,8 @@ public class AnimalMonitor
      * @param animal The type of animal.
      */
     public void printSightingsOf(String animal)
-    {
-        for(Sighting record : sightings) {
-            if(animal.equals(record.getAnimal())) {
-                System.out.println(record.getDetails());
-            }
-        }
+    { 
+        sightings.stream().filter(s -> animal.equals(s.getAnimal())).forEach((Sighting record) -> System.out.println(record.getDetails()));
     }
     
     /**
