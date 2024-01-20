@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.PriorityQueue;
+import java.util.Comparator;
 
 /**
  * This class provides the ability to simulate a number of
@@ -43,7 +45,7 @@ public class Race
      * 
      * @return the car that is leading the race
      */
-    public Car getRaceLeader(HashMap<Car, Integer> totalTimes)
+    public ArrayList<Car> getPositions(HashMap<Car, Integer> totalTimes)
     {
         // No cars in the race
         if (totalTimes.size() == 0)
@@ -51,24 +53,21 @@ public class Race
             return null;
         }
 
-        //TASK: determine which car, out of the three
-        //in the race, is the leader
-        int minimumTotalTime = totalTimes.get(cars.get(0));
-        Car minimumCar = null;
-
-        for (int i = 0; i < totalTimes.size(); i ++)
-        {   
-            Car currentCar = cars.get(i);
-            
-            // Car with the lowest total time
-            if (totalTimes.get(currentCar) < minimumTotalTime)
-            {
-                minimumTotalTime = totalTimes.get(currentCar);
-                minimumCar = currentCar;
-            }
+        int numCars = totalTimes.size();
+        // Priority queue, ordering by the total time of each car in the race
+        PriorityQueue<Car> priorityQueue = new PriorityQueue<Car>(numCars, Comparator.comparingInt(totalTimes::get));
+        for (Car racecar: cars)
+        {
+            priorityQueue.add(racecar);
         }
 
-        return minimumCar;
+        // Find the positions of the cars
+        ArrayList<Car> positions = new ArrayList<Car>();
+        for (int i = 0; i < numCars; i ++)
+        {
+            positions.add(priorityQueue.poll()); // Add the car with the minimum total time (front of the queue)
+        }
+        return positions;
     }
     
     /**
@@ -117,8 +116,16 @@ public class Race
                 //-name of the car that is leading the race
                 System.out.println(racecar.getName() + ": " + "Lap time: " + lapTime + " | Total time: " + totalTimes.get(racecar));
             }
-
-            System.out.println("Current race leader: " + this.getRaceLeader(totalTimes).getName());
+            
+            // Output positions of all cars in the race
+            System.out.println();
+            System.out.println("Current positions:");
+            ArrayList<Car> carPositions = this.getPositions(totalTimes);
+            for (int j = 0; j < carPositions.size(); j++)
+            {
+                Car currentCar = carPositions.get(j);
+                System.out.println((j + 1) + ": " + currentCar.getName());
+            }
             System.out.println();
         }
     }
