@@ -29,7 +29,9 @@ public class AnimalMonitor
         animalMonitor1.printSightingsOf("Buffalo");
         animalMonitor1.printSightingsInPeriod(2);
         animalMonitor1.printSightingsOfAnimalInPeriod("Mountain Gorilla", 2);
+        System.out.println(animalMonitor1.getCount("Buffalo"));
     }
+
     /**
      * Add the sightings recorded in the given filename to the current list.
      * @param filename A CSV file of Sighting records.
@@ -75,7 +77,7 @@ public class AnimalMonitor
     {
         sightings.stream().filter(s -> animal.equals(s.getAnimal())).filter(s -> period == s.getPeriod()).forEach((Sighting record) -> System.out.println(record.getDetails()));
     } 
-    
+
     /**
      * Print all the sightings by the given spotter.
      * @param spotter The ID of the spotter.
@@ -112,13 +114,7 @@ public class AnimalMonitor
      */
     public int getCount(String animal)
     {
-        int total = 0;
-        for(Sighting sighting : sightings) {
-            if(animal.equals(sighting.getAnimal())) {
-                total = total + sighting.getCount();
-            }
-        }
-        return total;
+        return sightings.stream().filter(s -> animal.equals(s.getAnimal())).map(s -> s.getCount()).reduce(0, (acc, element) -> (acc + element));
     }
     
     /**
