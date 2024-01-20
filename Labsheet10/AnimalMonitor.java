@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.stream.Stream;
 
 /**
  * Monitor counts of different types of animal.
@@ -30,6 +29,7 @@ public class AnimalMonitor
         animalMonitor1.printSightingsInPeriod(2);
         animalMonitor1.printSightingsOfAnimalInPeriod("Mountain Gorilla", 2);
         System.out.println(animalMonitor1.getCount("Buffalo"));
+        animalMonitor1.printSightingsBy(3);
     }
 
     /**
@@ -84,11 +84,7 @@ public class AnimalMonitor
      */
     public void printSightingsBy(int spotter)
     {
-        for(Sighting record : sightings) {
-            if(record.getSpotter() == spotter) {
-                System.out.println(record.getDetails());
-            }
-        }        
+        sightings.stream().filter(s -> s.getSpotter() == spotter).map(s -> s.getDetails()).forEach(System.out::println);;
     }
     
     /**
