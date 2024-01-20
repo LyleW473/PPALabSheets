@@ -21,6 +21,11 @@ public class AnimalMonitor
         this.sightings = new ArrayList<>();
     }
     
+    public static void main(String[] args) {
+        AnimalMonitor animalMonitor1 = new AnimalMonitor();
+        animalMonitor1.addSightings("sightings.csv");
+        animalMonitor1.printList();
+    }
     /**
      * Add the sightings recorded in the given filename to the current list.
      * @param filename A CSV file of Sighting records.
@@ -36,9 +41,7 @@ public class AnimalMonitor
      */
     public void printList()
     {
-        for(Sighting record : sightings) {
-            System.out.println(record.getDetails());
-        }
+        sightings.forEach((Sighting record) -> System.out.println(record.getDetails()));
     }
     
     /**
