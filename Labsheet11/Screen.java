@@ -113,6 +113,25 @@ public class Screen
     }
 
     /**
+     * Creates a ticket for the seat at the row and column of the screen.
+     * @return Ticket object containing the screen ID, row number, seat number and movie details if there is an available seat, otherwise null.
+     */
+    public Ticket getSpecificTicket(int rowIndex, int colIndex)
+    {
+        // Check if this seat is available
+        boolean successful = this.bookSeat(rowIndex, colIndex);
+        if (!successful)
+        {
+            return null;
+        }
+
+        // Return ticket if successful
+        int rowNumber = rowIndex + 1;
+        int seatNumber = colIndex + 1;
+        return new Ticket(this.id, rowNumber, seatNumber, this.movie.getTitle(), this.movie.getCost());
+    }
+
+    /**
      * Creates a ticket for the best seat at this screen.
      * @return Ticket object containing the screen ID, row number, seat number and movie details if the best seat is available, otherwise null.
      */

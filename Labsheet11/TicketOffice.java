@@ -11,7 +11,7 @@ public class TicketOffice
     public static void main(String[] args) {
         TicketOffice ticketOffice = new TicketOffice();
         ticketOffice.addScreen(0, 4, 5);
-        ticketOffice.addScreen(3, 3, 3);
+        ticketOffice.addScreen(3, 4, 3);
         ticketOffice.showNewMovie(0, "Lyle, Lyle, Crocodile", 3.25);
         ticketOffice.showNewMovie(3, "Kung Fu Panda 4", 10.00);
 
@@ -34,6 +34,12 @@ public class TicketOffice
                 }
             }
         }
+
+        System.out.println(ticketOffice.bookSpecificTicket("Kung Fu Panda 4", 2, 2));
+        System.out.println(ticketOffice.bookSpecificTicket("Kung Fu Panda 4", 3, 2));
+        System.out.println(ticketOffice.bookSpecificTicket("Kung Fu Panda 4", 4, 0));
+        System.out.println(ticketOffice.bookSpecificTicket("Kung Fu Panda 4", 3, 1));
+
     }
 
     /**
@@ -141,6 +147,20 @@ public class TicketOffice
             return null;
         }
         return screen.getBestTicket();
+    }
+
+    public Ticket bookSpecificTicket(String movieTitle, int rowNumber, int seatNumber)
+    {
+        Screen screen = findMovie(movieTitle);
+        if (screen == null)
+        {
+            return null;
+        }
+
+        int rowIndex = rowNumber - 1;
+        int colIndex = seatNumber - 1;
+
+        return screen.getSpecificTicket(rowIndex, colIndex);
     }
 
     /**
