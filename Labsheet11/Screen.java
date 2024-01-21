@@ -5,12 +5,11 @@ public class Screen
     private String movieTitle;
     private double movieCost;
     private int numAvailableSeats;
-    private int originalNumAvailableSeats;
     private int numRows;
     private int numCols;
 
     public static void main(String[] args) {
-        Screen screen1 = new Screen(0, "Lyle, Lyle, Crocodile", 3.25, 4, 16);
+        Screen screen1 = new Screen(0, "Lyle, Lyle, Crocodile", 3.25, 4, 5);
         System.out.println(screen1.bookSeat(0, 1));
         System.out.println(screen1.bookSeat(1, 3));
         System.out.println(screen1.bookSeat(1, 3));
@@ -18,23 +17,22 @@ public class Screen
 
     }
 
-    public Screen(int id, String movieTitle, double movieCost, int numRows, int numAvailableSeats)
+    public Screen(int id, String movieTitle, double movieCost, int numRows, int numCols)
     {      
         // Exception for invalid arguments
-        if (numRows == 0 || numAvailableSeats == 0)
+        if (numRows == 0 || numCols == 0)
         {
-            throw new IllegalArgumentException("Enter a valid number of rows and available seats when creating a new'Screen' object!");
+            throw new IllegalArgumentException("Enter a valid number of rows and columns when creating a new 'Screen' object!");
         }
 
         this.id = id;
         this.movieTitle = movieTitle;
         this.movieCost = movieCost;
-        this.numRows = numRows;
-        this.numAvailableSeats = numAvailableSeats; // Changes
-        this.originalNumAvailableSeats = numAvailableSeats; // Does not change
 
         // Initialise all seats
-        this.numCols = (numAvailableSeats + numRows - 1) / numRows; // Find the number of columns for each row
+        this.numRows = numRows;
+        this.numCols = numCols;
+        this.numAvailableSeats = numRows * numCols;
         seats = new int[numRows][numCols];
         emptyScreen();
     }
@@ -53,17 +51,6 @@ public class Screen
             }
         }
 
-        // If there are an "excess" amount of seats that were created, remove them
-        int seatsToRemoveStart = (numRows * numCols) - originalNumAvailableSeats;
-        if (seatsToRemoveStart > 0)
-        {
-            // Mark the seats that aren't available with the special value (-1)
-            for (int i = numCols - seatsToRemoveStart; i < numCols; i++)
-            {
-                seats[numRows - 1][i] = -1;
-            }
-        }
-        
         for (int i = 0; i < numRows; i ++)
         {
             for (int j = 0; j < numCols; j++)
@@ -73,7 +60,7 @@ public class Screen
         }
 
         // Reset the number of available seats in this screen
-        this.numAvailableSeats = this.originalNumAvailableSeats;
+        this.numAvailableSeats = numRows * numCols;
     }
 
     /**
