@@ -11,7 +11,7 @@ public class Ticket
     private double movieCost;
     private Date timeCreated;
 
-    public Ticket(int ScreenID, int rowNumber, int seatNumber, String movieTitle, double movieCost)
+    public Ticket(int screenID, int rowNumber, int seatNumber, String movieTitle, double movieCost)
     {
         this.screenID = screenID;
         this.rowNumber = rowNumber;
@@ -30,5 +30,13 @@ public class Ticket
     public static int getNumTicketsCreated()
     {
         return Ticket.totalTicketsCreated;
+    }
+
+    /**
+     * Print out the details of the ticket.
+     */
+    public void printDetails()
+    {
+        System.out.println("Screen ID: "  + screenID + " | Movie title: " + movieTitle + " | Movie cost: " + movieCost + " | Row: " + rowNumber + " | Seat: " + seatNumber);
     }
 }

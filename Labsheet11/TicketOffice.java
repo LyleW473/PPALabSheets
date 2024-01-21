@@ -17,7 +17,8 @@ public class TicketOffice
 
         ticketOffice.showMovies();
 
-        Ticket ticket1 = new Ticket(0, 0, 0, "Kung Fu Panda 4", 10.00);
+        Ticket ticket1 = new Ticket(3, 3, 1, "Kung Fu Panda 4", 10.00);
+        ticket1.printDetails();
 
     }
 
