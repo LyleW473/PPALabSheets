@@ -71,7 +71,7 @@ public class Screen
                 System.out.println(i + " " + j + " " + seats[i][j]);
             }
         }
-        
+
         // Reset the number of available seats in this screen
         this.numAvailableSeats = this.originalNumAvailableSeats;
     }
@@ -110,5 +110,29 @@ public class Screen
         emptyScreen();
         System.out.println(this.movieTitle);
         System.out.println(this.movieCost);
+    }
+
+    /**
+     * @return The title of the movie.
+     */
+    public String getTitle()
+    {
+        return this.movieTitle;
+    }
+
+    /**
+     * @return The cost of the movie.
+     */
+    public double getCost()
+    {
+        return this.movieCost;
+    }
+
+    /**
+     * @return The ID of this screen
+     */
+    public int getID()
+    {
+        return this.id;
     }
 }
