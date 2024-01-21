@@ -112,6 +112,25 @@ public class Screen
     }
 
     /**
+     * Creates a ticket for the best seat at this screen.
+     * @return Ticket object containing the screen ID, row number, seat number and movie details if the best seat is available, otherwise null.
+     */
+    public Ticket getBestTicket()
+    {
+        int bestRowIndex = numRows / 2;
+        int bestColIndex = numCols / 2;
+        if (seats[bestRowIndex][bestColIndex] == 1) // Check if this seat is available
+        {
+            return null;
+        }
+
+        double movieCost = this.movie.getCost() * 1.2; // 20% extra cost
+        int rowNumber = bestRowIndex + 1;
+        int seatNumber = bestColIndex + 1;
+        return new Ticket(this.id, rowNumber, seatNumber, this.movie.getTitle(), movieCost);
+    }
+    
+    /**
      * @return The movie displayed on this screen.
      */
     public Movie getMovie()

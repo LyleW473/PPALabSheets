@@ -11,7 +11,7 @@ public class TicketOffice
     public static void main(String[] args) {
         TicketOffice ticketOffice = new TicketOffice();
         ticketOffice.addScreen(0, 4, 5);
-        ticketOffice.addScreen(3, 1, 1);
+        ticketOffice.addScreen(3, 3, 3);
         ticketOffice.showNewMovie(0, "Lyle, Lyle, Crocodile", 3.25);
         ticketOffice.showNewMovie(3, "Kung Fu Panda 4", 10.00);
 
@@ -19,6 +19,9 @@ public class TicketOffice
 
         Ticket ticket1 = ticketOffice.bookRandomTicket("Kung Fu Panda 4");
         ticket1.printDetails();
+        Ticket ticket2 = ticketOffice.bookBestTicket("Kung Fu Panda 4");
+        ticket2.printDetails();
+
     }
 
     /**
@@ -108,5 +111,15 @@ public class TicketOffice
     {
         Screen screen = findMovie(movieTitle);
         return screen.getRandomTicket();
+    }
+
+    /**
+     * Returns a ticket to the best seat at the movie with the provided movie title.
+     * @return Aticket to the best seat at the movie with the provided movie title. Returns null if the best seat is not available.
+     */
+    public Ticket bookBestTicket(String movieTitle)
+    {
+        Screen screen = findMovie(movieTitle);
+        return screen.getBestTicket();
     }
 }
