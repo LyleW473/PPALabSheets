@@ -27,8 +27,11 @@ public class TicketOffice
      */
     public void addScreen(int screenID, int numRows, int numCols)
     {      
-        Screen newScreen = new Screen(screenID, "", Double.parseDouble("0"), numRows, numCols); // Create a new screen that shows no movie
-        this.screenIDHashMap.put(screenID, newScreen); // Create new mapping
+        if (!screenIDHashMap.containsKey(screenID)) // Screen doesn't already exist
+        {
+            Screen newScreen = new Screen(screenID, "", Double.parseDouble("0"), numRows, numCols); // Create a new screen that shows no movie
+            this.screenIDHashMap.put(screenID, newScreen); // Create new mapping
+        }
     }
 
     /**
