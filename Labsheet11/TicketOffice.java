@@ -9,14 +9,15 @@ public class TicketOffice
     }
 
     public static void main(String[] args) {
-        TicketOffice ticketOffice1 = new TicketOffice();
-        ticketOffice1.addScreen(0, 4, 5);
+        TicketOffice ticketOffice = new TicketOffice();
+        ticketOffice.addScreen(0, 4, 5);
+        System.out.println(ticketOffice.findScreen(0).getID());
 
-        Screen screen1 = new Screen(0, "Lyle, Lyle, Crocodile", 3.25, 4, 5);
-        System.out.println(screen1.bookSeat(0, 1));
-        System.out.println(screen1.bookSeat(1, 3));
-        System.out.println(screen1.bookSeat(1, 3));
-        screen1.changeMovie("Kung Fu Panda 4", 10);
+        // Screen screen1 = new Screen(0, "Lyle, Lyle, Crocodile", 3.25, 4, 5);
+        // System.out.println(screen1.bookSeat(0, 1));
+        // System.out.println(screen1.bookSeat(1, 3));
+        // System.out.println(screen1.bookSeat(1, 3));
+        // screen1.changeMovie("Kung Fu Panda 4", 10);
 
     }
 
@@ -32,8 +33,18 @@ public class TicketOffice
         this.screenIDHashMap.put(screenID, newScreen); // Create new mapping
     }
 
-    public void findScreen(int screenID)
-    {
+    /**
+     * Finds the screen with the corresponding ID.
+     * @param screenID The ID of the screen to find.
+     * @return The screen with the corresponding ID, or null if not found.
+     */
+    public Screen findScreen(int screenID)
+    {   
+        if (this.screenIDHashMap.containsKey(screenID))
+        {
+            return this.screenIDHashMap.get(screenID);
+        }
+        return null;
     }
 
     public void showNewMovie(int screenID, String movieTitle, double movieCost)
