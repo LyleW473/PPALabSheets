@@ -12,14 +12,7 @@ public class TicketOffice
         TicketOffice ticketOffice = new TicketOffice();
         ticketOffice.addScreen(0, 4, 5);
         ticketOffice.showNewMovie(0, "Lyle, Lyle, Crocodile", 3.25);
-        System.out.println(ticketOffice.findScreen(0).getTitle());
-        System.out.println(ticketOffice.findScreen(0).getCost());
-
-        // Screen screen1 = new Screen(0, "Lyle, Lyle, Crocodile", 3.25, 4, 5);
-        // System.out.println(screen1.bookSeat(0, 1));
-        // System.out.println(screen1.bookSeat(1, 3));
-        // System.out.println(screen1.bookSeat(1, 3));
-        // screen1.changeMovie("Kung Fu Panda 4", 10);
+        ticketOffice.showMovies();
 
     }
 

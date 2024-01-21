@@ -2,8 +2,8 @@ public class Screen
 {
     private int id;
     private int[][] seats; // 0 = Empty, 1 = Occupied, -2 = Excess
-    private String movieTitle;
-    private double movieCost;
+    private Movie movie;
+
     private int numAvailableSeats;
     private int numRows;
     private int numCols;
@@ -17,8 +17,7 @@ public class Screen
         }
 
         this.id = id;
-        this.movieTitle = movieTitle;
-        this.movieCost = movieCost;
+        this.movie = null;
 
         // Initialise all seats
         this.numRows = numRows;
@@ -42,13 +41,13 @@ public class Screen
             }
         }
 
-        for (int i = 0; i < numRows; i ++)
-        {
-            for (int j = 0; j < numCols; j++)
-            {
-                System.out.println(i + " " + j + " " + seats[i][j]);
-            }
-        }
+        // for (int i = 0; i < numRows; i ++)
+        // {
+        //     for (int j = 0; j < numCols; j++)
+        //     {
+        //         System.out.println(i + " " + j + " " + seats[i][j]);
+        //     }
+        // }
 
         // Reset the number of available seats in this screen
         this.numAvailableSeats = numRows * numCols;
@@ -83,29 +82,20 @@ public class Screen
      */
     public void changeMovie(String movieTitle, double movieCost)
     {
-        this.movieTitle = movieTitle;
-        this.movieCost = movieCost;
+        this.movie = new Movie(movieTitle, movieCost);
         emptyScreen();
     }
 
     /**
-     * @return The title of the movie.
+     * @return The movie displayed on this screen.
      */
-    public String getTitle()
+    public Movie getMovie()
     {
-        return this.movieTitle;
+        return this.movie;
     }
 
     /**
-     * @return The cost of the movie.
-     */
-    public double getCost()
-    {
-        return this.movieCost;
-    }
-
-    /**
-     * @return The ID of this screen
+     * @return The ID of this screen.
      */
     public int getID()
     {
