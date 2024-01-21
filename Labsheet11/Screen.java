@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Screen 
 {
     private int id;
@@ -55,16 +57,12 @@ public class Screen
 
     /**
      * Resets the seats of the screen to its initial starting state
-     * @param rowNumber The row number on the Ticket.
-     * @param seatNumber The seat number on the Ticket.
+     * @param rowIndex The row index.
+     * @param seatIndex The seat index.
      * @return Boolean indicating whether the booking was successful or not.
      */
-    public boolean bookSeat(int rowNumber, int seatNumber)
+    public boolean bookSeat(int rowIndex, int seatIndex)
     {
-        // Row and seat number starts from 0, not 1
-        int rowIndex = rowNumber - 1;
-        int seatIndex = seatNumber - 1;
-
         // Check if row and seat indexes are valid and that the seat hasn't already been booked
         if ((0 <= rowIndex && rowIndex < numRows) && (0 <= seatIndex && seatIndex < numCols) && (seats[rowIndex][seatIndex] != 1))
         {
@@ -84,6 +82,33 @@ public class Screen
     {
         this.movie = new Movie(movieTitle, movieCost);
         emptyScreen();
+    }
+
+    /**
+     * Creates a ticket for a random available seat at this screen.
+     * @return Ticket object containing the screen ID, row number, seat number and movie details if there is an available seat, otherwise null.
+     */
+    public Ticket getRandomTicket()
+    {   
+        // No seats left
+        if (numAvailableSeats == 0)
+        {
+            return null;
+        }
+
+        // Keep generating random row and column indexes until an available seat is found
+        int rowIndex = 0;
+        int colIndex = 0;
+        Random randomGen = new Random();
+        while (!bookSeat(rowIndex, colIndex))
+        {
+            rowIndex = randomGen.nextInt(this.numRows);
+            colIndex = randomGen.nextInt(this.numCols);
+        }
+
+        int rowNumber = rowIndex + 1;
+        int seatNumber = colIndex + 1;
+        return new Ticket(this.id, rowNumber, seatNumber, this.movie.getTitle(), this.movie.getCost());
     }
 
     /**
