@@ -81,13 +81,11 @@ public class Screen
      * @param movieTitle The new movie's title.
      * @param movieCost The new movie's cost.
      */
-    public void changeMovie(String movieTitle, int movieCost)
+    public void changeMovie(String movieTitle, double movieCost)
     {
         this.movieTitle = movieTitle;
         this.movieCost = movieCost;
         emptyScreen();
-        System.out.println(this.movieTitle);
-        System.out.println(this.movieCost);
     }
 
     /**

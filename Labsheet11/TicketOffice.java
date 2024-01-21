@@ -11,7 +11,9 @@ public class TicketOffice
     public static void main(String[] args) {
         TicketOffice ticketOffice = new TicketOffice();
         ticketOffice.addScreen(0, 4, 5);
-        System.out.println(ticketOffice.findScreen(0).getID());
+        ticketOffice.showNewMovie(0, "Lyle, Lyle, Crocodile", 3.25);
+        System.out.println(ticketOffice.findScreen(0).getTitle());
+        System.out.println(ticketOffice.findScreen(0).getCost());
 
         // Screen screen1 = new Screen(0, "Lyle, Lyle, Crocodile", 3.25, 4, 5);
         // System.out.println(screen1.bookSeat(0, 1));
@@ -47,8 +49,19 @@ public class TicketOffice
         return null;
     }
 
+    /**
+     * Finds the screen with the corresponding ID, and displays the new movie with the provided title and cost.
+     * @param screenID The ID of the screen to display the new movie.
+     * @param movieTitle The new movie's title.
+     * @param movieCost The new movie's cost.
+     */
     public void showNewMovie(int screenID, String movieTitle, double movieCost)
-    {
+    {   
+        Screen movieScreen = findScreen(screenID);
+        if (movieScreen != null)
+        {
+            movieScreen.changeMovie(movieTitle, movieCost);
+        }
     }
     
     public void showMovies()
