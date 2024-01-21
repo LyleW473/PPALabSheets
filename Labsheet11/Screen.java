@@ -5,14 +5,17 @@ public class Screen
     private String movieTitle;
     private double movieCost;
     private int numAvailableSeats;
+    private int originalNumAvailableSeats;
     private int numRows;
     private int numCols;
 
     public static void main(String[] args) {
         Screen screen1 = new Screen(0, "Lyle, Lyle, Crocodile", 3.25, 4, 16);
-        System.out.println(screen1.book(0, 1));
-        System.out.println(screen1.book(1, 3));
-        System.out.println(screen1.book(1, 3));
+        System.out.println(screen1.bookSeat(0, 1));
+        System.out.println(screen1.bookSeat(1, 3));
+        System.out.println(screen1.bookSeat(1, 3));
+        screen1.changeMovie("Kung Fu Panda 4", 10);
+
     }
 
     public Screen(int id, String movieTitle, double movieCost, int numRows, int numAvailableSeats)
@@ -27,7 +30,8 @@ public class Screen
         this.movieTitle = movieTitle;
         this.movieCost = movieCost;
         this.numRows = numRows;
-        this.numAvailableSeats = numAvailableSeats;
+        this.numAvailableSeats = numAvailableSeats; // Changes
+        this.originalNumAvailableSeats = numAvailableSeats; // Does not change
 
         // Initialise all seats
         this.numCols = (numAvailableSeats + numRows - 1) / numRows; // Find the number of columns for each row
@@ -36,12 +40,21 @@ public class Screen
     }
     
     /**
-     * Resets the seats of the screen to its initial starting state
+     * Resets the seats of the screen to its initial starting state.
      */
     public void emptyScreen()
     {
+        // Set all seats to 0
+        for (int i = 0; i < numRows; i ++)
+        {
+            for (int j = 0; j < numCols; j++)
+            {
+                seats[i][j] = 0;
+            }
+        }
+
         // If there are an "excess" amount of seats that were created, remove them
-        int seatsToRemoveStart = (numRows * numCols) - numAvailableSeats;
+        int seatsToRemoveStart = (numRows * numCols) - originalNumAvailableSeats;
         if (seatsToRemoveStart > 0)
         {
             // Mark the seats that aren't available with the special value (-1)
@@ -58,15 +71,18 @@ public class Screen
                 System.out.println(i + " " + j + " " + seats[i][j]);
             }
         }
+        
+        // Reset the number of available seats in this screen
+        this.numAvailableSeats = this.originalNumAvailableSeats;
     }
 
     /**
      * Resets the seats of the screen to its initial starting state
-     * @param rowNumber The row number on the Ticket
-     * @param seatNumber The seat number on the Ticket
-     * @return Boolean indicating whether the booking was successful or not
+     * @param rowNumber The row number on the Ticket.
+     * @param seatNumber The seat number on the Ticket.
+     * @return Boolean indicating whether the booking was successful or not.
      */
-    public boolean book(int rowNumber, int seatNumber)
+    public boolean bookSeat(int rowNumber, int seatNumber)
     {
         // Row and seat number starts from 0, not 1
         int rowIndex = rowNumber - 1;
@@ -80,5 +96,19 @@ public class Screen
             return true;
         }
         return false;
+    }
+
+    /**
+     * Changes the movie currently shown on this screen.
+     * @param movieTitle The new movie's title.
+     * @param movieCost The new movie's cost.
+     */
+    public void changeMovie(String movieTitle, int movieCost)
+    {
+        this.movieTitle = movieTitle;
+        this.movieCost = movieCost;
+        emptyScreen();
+        System.out.println(this.movieTitle);
+        System.out.println(this.movieCost);
     }
 }
