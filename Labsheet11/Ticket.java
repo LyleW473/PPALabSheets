@@ -37,6 +37,6 @@ public class Ticket
      */
     public void printDetails()
     {
-        System.out.println("Screen ID: "  + screenID + " | Movie title: " + movieTitle + " | Movie cost: " + movieCost + " | Row: " + rowNumber + " | Seat: " + seatNumber);
+        System.out.println("Screen ID: "  + screenID + " | Movie title: " + movieTitle + " | Movie cost: " + movieCost + " | Row: " + rowNumber + " | Seat: " + seatNumber + " | Time created: " + timeCreated);
     }
 }
