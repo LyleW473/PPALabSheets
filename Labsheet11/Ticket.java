@@ -2,6 +2,8 @@ import java.util.Date;
 
 public class Ticket 
 {
+    private static int totalTicketsCreated = 0;
+
     private int screenID;
     private int rowNumber;
     private int seatNumber;
@@ -17,5 +19,16 @@ public class Ticket
         this.movieTitle = movieTitle;
         this.movieCost = movieCost;
         this.timeCreated = new Date();
+
+        // Increment number of total tickets created
+        Ticket.totalTicketsCreated ++;
+    }
+
+    /**
+     * @return The total number of tickets created.
+     */
+    public static int getNumTicketsCreated()
+    {
+        return Ticket.totalTicketsCreated;
     }
 }
