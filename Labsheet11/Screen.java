@@ -8,15 +8,6 @@ public class Screen
     private int numRows;
     private int numCols;
 
-    public static void main(String[] args) {
-        Screen screen1 = new Screen(0, "Lyle, Lyle, Crocodile", 3.25, 4, 5);
-        System.out.println(screen1.bookSeat(0, 1));
-        System.out.println(screen1.bookSeat(1, 3));
-        System.out.println(screen1.bookSeat(1, 3));
-        screen1.changeMovie("Kung Fu Panda 4", 10);
-
-    }
-
     public Screen(int id, String movieTitle, double movieCost, int numRows, int numCols)
     {      
         // Exception for invalid arguments
