@@ -76,6 +76,7 @@ public class Screen
         if ((0 <= rowIndex && rowIndex < numRows) && (0 <= seatIndex && seatIndex < numCols) && (seats[rowIndex][seatIndex] != 1))
         {
             seats[rowIndex][seatIndex] = 1; // Set as booked
+            numAvailableSeats -= 1; // Take away one available seat
             return true;
         }
         return false;
