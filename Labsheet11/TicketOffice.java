@@ -11,9 +11,9 @@ public class TicketOffice
     public static void main(String[] args) {
         TicketOffice ticketOffice = new TicketOffice();
         ticketOffice.addScreen(0, 4, 5);
-        ticketOffice.addScreen(1, 5, 10);
+        ticketOffice.addScreen(3, 5, 10);
         ticketOffice.showNewMovie(0, "Lyle, Lyle, Crocodile", 3.25);
-        ticketOffice.showNewMovie(1, "Kung Fu Panda 4", 10.00);
+        ticketOffice.showNewMovie(3, "Kung Fu Panda 4", 10.00);
 
         ticketOffice.showMovies();
 
@@ -70,13 +70,17 @@ public class TicketOffice
      */
     public void showMovies()
     {   
-        int i = 1;
         for (Screen s: screenIDHashMap.values())
-        {
-            String movieTitle = s.getMovie().getTitle();
-            double movieCost = s.getMovie().getCost();
-            System.out.println("Screen number: " + i + " | Movie title: " + movieTitle + " | Movie cost: " + movieCost);
-            i += 1;
+        {   
+            Movie screenMovie = s.getMovie();
+            if (screenMovie == null)
+            {
+                continue;
+            }
+            int screenID = s.getID();
+            String movieTitle = screenMovie.getTitle();
+            double movieCost = screenMovie.getCost();
+            System.out.println("Screen ID: " + screenID + " | Movie title: " + movieTitle + " | Movie cost: " + movieCost);
         }
     }
 
