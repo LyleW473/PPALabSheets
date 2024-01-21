@@ -17,11 +17,23 @@ public class TicketOffice
 
         ticketOffice.showMovies();
 
-        Ticket ticket1 = ticketOffice.bookRandomTicket("Kung Fu Panda 4");
-        ticket1.printDetails();
+        // Ticket ticket1 = ticketOffice.bookRandomTicket("Kung Fu Panda 4");
+        // ticket1.printDetails();
+
         Ticket ticket2 = ticketOffice.bookBestTicket("Kung Fu Panda 4");
         ticket2.printDetails();
 
+        for (int i = 0; i < 3; i ++)
+        {
+            Ticket[] tickets = ticketOffice.bookTickets(3, "Kung Fu Panda 4");
+            if (tickets != null)
+            {
+                for (Ticket t: tickets)
+                {
+                    t.printDetails();
+                }
+            }
+        }
     }
 
     /**
@@ -110,6 +122,10 @@ public class TicketOffice
     public Ticket bookRandomTicket(String movieTitle)
     {
         Screen screen = findMovie(movieTitle);
+        if (screen == null)
+        {
+            return null;
+        }
         return screen.getRandomTicket();
     }
 
@@ -120,6 +136,24 @@ public class TicketOffice
     public Ticket bookBestTicket(String movieTitle)
     {
         Screen screen = findMovie(movieTitle);
+        if (screen == null)
+        {
+            return null;
+        }
         return screen.getBestTicket();
+    }
+
+    /**
+     * Returns a random ticket at the movie with the provided movie title.
+     * @return A random ticket at the movie with the provided movie title. Returns null if no seats were available.
+     */
+    public Ticket[] bookTickets(int n, String movieTitle)
+    {   
+        Screen screen = findMovie(movieTitle);
+        if (screen == null)
+        {
+            return null;
+        }
+        return screen.getNeighbouringTickets(n);
     }
 }

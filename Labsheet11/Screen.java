@@ -108,6 +108,7 @@ public class Screen
 
         int rowNumber = rowIndex + 1;
         int seatNumber = colIndex + 1;
+        this.bookSeat(rowIndex, colIndex); // Remove this seat from the available seats
         return new Ticket(this.id, rowNumber, seatNumber, this.movie.getTitle(), this.movie.getCost());
     }
 
@@ -127,7 +128,64 @@ public class Screen
         double movieCost = this.movie.getCost() * 1.2; // 20% extra cost
         int rowNumber = bestRowIndex + 1;
         int seatNumber = bestColIndex + 1;
+        this.bookSeat(bestRowIndex, bestColIndex); // Remove this seat from the available seats
         return new Ticket(this.id, rowNumber, seatNumber, this.movie.getTitle(), movieCost);
+    }
+
+    /**
+     * Finds a seat position where the next n seats are also available.
+     * @return An array containing 2 integers, the row index and the column index. Return null if no such seats can be found.
+     */
+    public int[] getSeatNeighbours(int n)
+    {
+        for (int i = 0; i < numRows; i ++)
+        {
+            for (int j = 0; j < numCols - n + 1; j ++)
+            {
+                // Search from seat j up to seat j + n, and check if they are all available.
+                boolean found = true;
+                for (int k = j; (k < j + n) && (k < numCols); k ++)
+                {   
+                    if (seats[i][k] == 1)
+                    {
+                        found = false;
+                        break;
+                    }
+                }
+                // If this variable is still true, then it means we found a set of n neighbouring seats.
+                if (found == true)
+                {
+                    return new int[] {i, j}; // Return row and column index
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Finds a seat position where the next n seats are also available.
+     * @return Tickets for the neighbouring seats if such seats could be found, otherwise null.
+     */
+    public Ticket[] getNeighbouringTickets(int n)
+    {
+        Ticket[] tickets = new Ticket[n]; // Array of tickets (static size)
+
+        int[] startingPosition = this.getSeatNeighbours(n);
+        if (startingPosition == null) // If no such seats could be found
+        {
+            return null;
+        }   
+
+        // Create the tickets
+        int rowNumber = startingPosition[0] + 1;
+        int seatNumber = startingPosition[1] + 1; // Starting seat for the consecutive seats
+        for (int i = 0; i < n; i++)
+        {
+            int newSeatNumber = seatNumber + (i * 1); // The seat number of this ticket
+            this.bookSeat(startingPosition[0], startingPosition[1] + (i * 1)); // Remove seat
+            tickets[i] = new Ticket(this.id, rowNumber, newSeatNumber, this.movie.getTitle(), this.movie.getCost());
+        }
+        return tickets;
     }
     
     /**
