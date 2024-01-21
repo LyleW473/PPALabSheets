@@ -11,15 +11,14 @@ public class TicketOffice
     public static void main(String[] args) {
         TicketOffice ticketOffice = new TicketOffice();
         ticketOffice.addScreen(0, 4, 5);
-        ticketOffice.addScreen(3, 5, 10);
+        ticketOffice.addScreen(3, 1, 1);
         ticketOffice.showNewMovie(0, "Lyle, Lyle, Crocodile", 3.25);
         ticketOffice.showNewMovie(3, "Kung Fu Panda 4", 10.00);
 
         ticketOffice.showMovies();
 
-        Ticket ticket1 = new Ticket(3, 3, 1, "Kung Fu Panda 4", 10.00);
+        Ticket ticket1 = ticketOffice.bookRandomTicket("Kung Fu Panda 4");
         ticket1.printDetails();
-
     }
 
     /**
@@ -85,8 +84,29 @@ public class TicketOffice
         }
     }
 
-    public Screen bookRandomTicket(String movieTitle)
+    /**
+     * Finds the movie with the the provided movie title.
+     * @return The screen displaying the movie with the provided movie title, if not found, return null.
+     */
+    public Screen findMovie(String movieTitle)
     {
+        for (Screen screen: screenIDHashMap.values())
+        {
+            if (screen.getMovie().getTitle().equals(movieTitle))
+            {
+                return screen;
+            }
+        }
         return null;
+    }
+
+    /**
+     * Returns a random ticket at the movie with the provided movie title.
+     * @return A random ticket at the movie with the provided movie title. Returns null if no seats were available.
+     */
+    public Ticket bookRandomTicket(String movieTitle)
+    {
+        Screen screen = findMovie(movieTitle);
+        return screen.getRandomTicket();
     }
 }
