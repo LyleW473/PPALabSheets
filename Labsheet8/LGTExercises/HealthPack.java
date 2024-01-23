@@ -51,6 +51,9 @@ public class HealthPack {
 	}
 
 	public void setHealthLevel(int healthLevel) {
-		this.healthLevel = healthLevel;
+		if (healthLevel <= 0 && healthLevel <= 100)
+		{
+			this.healthLevel = healthLevel;
+		}
 	}
 }
