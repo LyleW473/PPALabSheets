@@ -1,4 +1,4 @@
-public class FoodPack {
+public class FoodItem{
     private static final int MAX_EFFECT = 100;
     private Location location;
 
@@ -10,23 +10,23 @@ public class FoodPack {
         float y = 5;
         float z = 2;
         Location location = new Location(x, y, z);
-        FoodPack myFoodPack = new FoodPack(location, 50);
+        FoodItem myFoodItem = new FoodItem(location, 50);
 
-        System.out.println(myFoodPack.getEffect());
+        System.out.println(myFoodItem.getEffect());
         
-        myFoodPack.setEffect(20023020);
-        System.out.println(myFoodPack.getEffect());
+        myFoodItem.setEffect(20023020);
+        System.out.println(myFoodItem.getEffect());
 
-        myFoodPack.setEffect(2);
-        System.out.println(myFoodPack.getEffect());
+        myFoodItem.setEffect(2);
+        System.out.println(myFoodItem.getEffect());
         
-        myFoodPack.setLegendary();
-        System.out.println(myFoodPack.getEffect());
+        myFoodItem.setLegendary();
+        System.out.println(myFoodItem.getEffect());
 
-        System.out.println(myFoodPack.getLocation().toString());
+        System.out.println(myFoodItem.getLocation().toString());
     }
 
-    public FoodPack(Location loc, int eff) {
+    public FoodItem(Location loc, int eff) {
         this.location = loc;
         this.effect = eff;
     }
@@ -40,17 +40,17 @@ public class FoodPack {
     }
 
     public void setEffect(int effect) {
-        if (effect < MAX_EFFECT)
+        if (effect < FoodItem.MAX_EFFECT)
         {
             this.effect = effect;
         }
         else
         {
-            this.effect = MAX_EFFECT;
+            this.effect = FoodItem.MAX_EFFECT;
         }
     }
 
     public void setLegendary() {
-        effect = MAX_EFFECT;
+        effect = FoodItem.MAX_EFFECT;
     }
 }
