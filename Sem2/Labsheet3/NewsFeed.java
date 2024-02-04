@@ -17,6 +17,41 @@ public class NewsFeed
 {
     private ArrayList<Post> posts;
 
+    public static void main(String[] args) {
+
+        String author = "Lyle";
+        NewsFeed newsFeed1 = new NewsFeed();
+
+        EventPost eventPost1 = new EventPost(author);
+        eventPost1.addComment("Hi " + author);
+        eventPost1.display();
+        eventPost1.like();
+        eventPost1.like();
+        eventPost1.unlike();
+        eventPost1.display();
+        eventPost1.addDescription("Lyle is Lyle.");
+        System.out.println(eventPost1.getDescription());
+
+        MessagePost messagePost1 = new MessagePost("Lyle", "Hi my name is " + author);
+        messagePost1.addComment("Nice to meet you!");
+
+        PhotoPost photoPost1 = new PhotoPost(author, "selfie.png", "Me");
+        for (int i = 0; i < 3; i++)
+        {
+            photoPost1.like();
+        }
+        System.out.println(photoPost1.getCaption());
+        System.out.println(photoPost1.getImageFile());
+        System.out.println(photoPost1.getTimeStamp());
+
+        newsFeed1.addPost(photoPost1);
+        newsFeed1.addPost(messagePost1);
+        newsFeed1.addPost(eventPost1);
+
+        newsFeed1.show();
+
+    }
+
     /**
      * Construct an empty news feed.
      */
