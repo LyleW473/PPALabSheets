@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * This class stores information about a post in a social network news feed.
  * The main part of the post consists of a photo and a caption.
